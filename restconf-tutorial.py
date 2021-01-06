@@ -76,17 +76,22 @@ response = requests.patch(
 		'Content-Type': 'application/yang-data+json'
 	},
 	data = json.dumps({
-		'Cisco-IOS-XE-native:GigabitEthernet': {
-			'ip': {
-				'address': {
-					'primary': {
-						'address': '10.10.10.1',
-						'mask': '255.255.255.0'
-					}
-				}
-			}
-		}
-	}),
+        "Cisco-IOS-XE-native:GigabitEthernet": {
+            "name": "2",
+            "ip": {
+            "address": {
+                "primary": {
+                "address": "10.10.10.1",
+                "mask": "255.255.255.0"
+                }
+            }
+            },
+            "mop": {
+            "enabled": 'false',
+            "sysid": 'false'
+            },
+        }
+    }),
 	verify = False)
 
 # Print the HTTP response code
@@ -129,13 +134,13 @@ response = requests.get(
 
 print(json.dumps(response, indent=2))
 
-response = requests.get(
-    url ="http://192.168.1.46:8080/rpc/get-vrrp-information",
-    auth = ("admin", "juniper1"),
-    headers = {
-        "Accept": "application/yang-data+json"
-    },
-    verify = False
-)
+# response = requests.get(
+#     url ="http://192.168.1.46:8080/rpc/get-vrrp-information",
+#     auth = ("admin", "juniper1"),
+#     headers = {
+#         "Accept": "application/yang-data+json"
+#     },
+#     verify = False
+# )
 
-print(response.text)
+# print(response.text)
