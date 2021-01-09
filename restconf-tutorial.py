@@ -144,3 +144,18 @@ print(json.dumps(response, indent=2))
 # )
 
 # print(response.text)
+
+response = requests.get(
+    url ="https://192.168.1.31/restconf/data/Cisco-IOS-XE-interfaces-oper:interfaces/interface=GigabitEthernet1",
+    auth = ("admin", "juniper1"),
+    headers = {
+        "Accept": "application/yang-data+json"
+    },
+    verify = False
+).json()
+
+
+print(json.dumps(response, indent=2))
+print(response["Cisco-IOS-XE-interfaces-oper:interface"]["description"])
+if response["Cisco-IOS-XE-interfaces-oper:interface"]["admin-status"] == "if-state-up":
+    print("Interface is UP")
