@@ -69,3 +69,17 @@ if response.status_code == 201:
     print(response.text)
     
 # curl -H "Accept: application/yang-data+json" -k https://192.168.1.211/restconf/data/Cisco-IOS-XE-native:native/interface/Loopback=100 -u "admin:juniper1"
+
+url =f"https://{router['host']}:{router['port']}/restconf/data/Cisco-IOS-XE-interfaces-oper:interfaces/interface=Loopback100"
+
+response = requests.get(
+    url=url,
+    headers=headers,
+    auth=(
+        router['user'],
+        router['password']
+    ),
+    verify=False,
+).json()
+
+print(json.dumps(response, indent=2))
